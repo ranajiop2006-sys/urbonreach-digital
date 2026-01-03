@@ -1,22 +1,91 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UrbanReach Digital</title>
+
   <style>
-    body{margin:0;font-family:Arial;background:#f9f9f9;color:#222}
-    header{background:#111;color:#fff;padding:90px 20px;text-align:center}
-    header h1{font-size:42px}
-    .btn{background:#ff6600;color:#fff;padding:14px 28px;text-decoration:none}
-    section{padding:70px 20px;max-width:1100px;margin:auto}
-    h2{text-align:center}
-    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-    .box{background:#fff;padding:25px;box-shadow:0 5px 15px rgba(0,0,0,.1)}
-    footer{background:#000;color:#aaa;text-align:center;padding:15px}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+    }
+
+    /* ===== HERO VIDEO HEADER ===== */
+    .hero{
+      position:relative;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .hero video{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      min-width:100%;
+      min-height:100%;
+      object-fit:cover;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:#fff;
+      background:rgba(0,0,0,0.6);
+      padding:20px;
+    }
+
+    .hero-content h1{
+      font-size:42px;
+      margin-bottom:10px;
+    }
+
+    .subheading{
+      font-size:18px;
+      margin-bottom:20px;
+      letter-spacing:1px;
+      color:#eee;
+    }
+
+    .btn{
+      background:#ff6600;
+      color:#fff;
+      padding:14px 28px;
+      text-decoration:none;
+      border-radius:4px;
+      font-weight:bold;
+    }
   </style>
 </head>
+
 <body>
+
+<header class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="4017225-uhd_3840_2160_30fps.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="hero-content">
+    <h1>UrbanReach Digital</h1>
+    <p class="subheading">
+      SEO • Website Designing • Social Media Marketing • Meta Ads
+    </p>
+    <a href="#contact" class="btn">Get Free Consultation</a>
+  </div>
+</header>
+
+</body>
+</html>
+
 
 <header>
   <h1>UrbanReach Digital</h1>
@@ -35,41 +104,44 @@
     <div class="box">
       <h3>SEO Optimization</h3>
       <p>
-        We help your business rank higher on Google through proper keyword
-        research, on-page optimization, technical SEO, and content strategy.
-        Our goal is to increase organic traffic and generate long-term leads.
+        We help your business rank higher on Google through keyword research,
+        on-page SEO, technical optimization, and content strategy to generate
+        long-term organic leads.
       </p>
+      <a class="service-btn" href="https://wa.me/919810360488">Contact for SEO</a>
     </div>
 
     <div class="box">
       <h3>Website Designing</h3>
       <p>
         We design modern, fast, and mobile-responsive websites that look
-        professional and convert visitors into customers. From landing pages
-        to business websites, we focus on user experience and performance.
+        professional and convert visitors into customers, focused on usability
+        and performance.
       </p>
+      <a class="service-btn" href="https://wa.me/919810360488">Contact for Website</a>
     </div>
 
     <div class="box">
       <h3>Social Media Marketing</h3>
       <p>
-        Build a strong brand presence on Instagram and Facebook with consistent
-        content, creative posts, and smart strategies. We help businesses grow
-        engagement, reach, and audience trust organically.
+        Grow your brand on Instagram and Facebook with strategic content,
+        creatives, and organic engagement to build trust and visibility.
       </p>
+      <a class="service-btn" href="https://wa.me/919810360488">Contact for SMM</a>
     </div>
 
     <div class="box">
       <h3>Meta Ads (Facebook & Instagram)</h3>
       <p>
-        We run performance-driven Facebook and Instagram ad campaigns focused
-        on lead generation, sales, and conversions. From audience targeting to
-        creative strategy, everything is optimized for ROI.
+        Performance-focused Meta ad campaigns for lead generation and sales,
+        including audience targeting, creatives, and ROI optimization.
       </p>
+      <a class="service-btn" href="https://wa.me/919810360488">Contact for Meta Ads</a>
     </div>
 
   </div>
 </section>
+
 
 
 <section id="contact">

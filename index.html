@@ -1,257 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UrbanReach Digital</title>
+<title>UrbanReach Digital - Digital Marketing Agency</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
+body{margin:0;font-family:Arial,sans-serif;color:#222;}
+header{background:#000;color:#fff;padding:120px 20px;text-align:center;}
+header h1{font-size:42px;margin-bottom:10px;}
+header p{font-size:18px;margin-bottom:20px;}
+.btn{background:#ff6600;color:#fff;padding:14px 28px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;margin:5px;}
+section{padding:60px 20px;max-width:1200px;margin:auto;}
+h2{text-align:center;font-size:32px;margin-bottom:40px;}
+.services{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.service-card{background:#fff;padding:25px;border-radius:8px;box-shadow:0 4px 15px rgba(0,0,0,.1);width:280px;text-align:center;}
+.service-card h3{margin-bottom:10px;}
+.portfolio{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;}
+.portfolio img{width:300px;height:200px;object-fit:cover;border-radius:8px;}
+
+.contact-form{max-width:600px;margin:auto;}
+.contact-form input, .contact-form textarea{
+  width:100%;padding:12px;margin:8px 0;border-radius:5px;border:1px solid #ccc;
 }
 
-/* ================= HEADER ================= */
-.main-header{
-  position:relative;
-  background:#111;
-  color:#fff;
-  padding:120px 20px;
-  text-align:center;
-}
-.header-logo{
-  position:absolute;
-  top:20px;
-  right:20px;
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  object-fit:cover;
-}
-.main-header h1{
-  font-size:42px;
-  margin-bottom:12px;
-}
-.main-header p{
-  font-size:18px;
-  color:#ddd;
-  margin-bottom:10px;
-}
-.subheading{
-  font-size:15px;
-  color:#bbb;
-}
-.header-buttons{
-  margin-top:35px;
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-.cta-btn{
-  background:#ff6600;
-  color:#fff;
-  padding:14px 34px;
-  border-radius:6px;
-  font-size:17px;
-  font-weight:600;
-  text-decoration:none;
-}
-.cta-outline{
-  background:transparent;
-  border:2px solid #fff;
-}
-
-/* ================= SECTIONS ================= */
-section{
-  padding:70px 20px;
-  max-width:1200px;
-  margin:auto;
-}
-h2{
-  text-align:center;
-  font-size:32px;
-  margin-bottom:40px;
-}
-
-/* ================= SERVICES ================= */
-.services{
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  align-items:stretch;
-  flex-wrap:nowrap;   /* desktop: ek hi line */
-}
-.box{
-  background:#fff;
-  padding:30px;
-  border-radius:6px;
-  box-shadow:0 5px 15px rgba(0,0,0,.08);
-  text-align:center;
-  min-width:260px;
-}
-.box h3{
-  margin-bottom:12px;
-}
-.box p{
-  font-size:15px;
-  color:#555;
-}
-.btn{
-  display:inline-block;
-  margin-top:15px;
-  background:#ff6600;
-  color:#fff;
-  padding:12px 24px;
-  border-radius:4px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* 📱 MOBILE FIX */
+footer{background:#000;color:#aaa;padding:40px 20px;text-align:center;}
+footer a{color:#ff6600;text-decoration:none;}
 @media(max-width:768px){
-  .main-header h1{
-    font-size:32px;
-  }
-  .services{
-    flex-wrap:wrap;   /* mobile: neeche aa jaaye */
-  }
-  .services .box{
-    width:100%;       /* ek ke niche ek */
-  }
-}
-
-/* ================= FOOTER ================= */
-.footer{
-  background:#000;
-  color:#bbb;
-  padding:60px 20px 20px;
-}
-.footer-container{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:30px;
-}
-.footer h3{
-  color:#fff;
-  margin-bottom:12px;
-}
-.footer a{
-  color:#bbb;
-  font-size:14px;
-  text-decoration:none;
-}
-.footer a:hover{
-  color:#ff6600;
-}
-.footer-brand img{
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  object-fit:cover;
-  margin-bottom:10px;
-}
-.footer-bottom{
-  margin-top:40px;
-  text-align:center;
-  font-size:13px;
-  border-top:1px solid #222;
-  padding-top:15px;
-  color:#777;
+  header h1{font-size:32px;}
+  .service-card{width:100%;}
+  .portfolio img{width:100%;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="main-header">
-  <img src="Logo-banner.png" alt="UrbanReach Digital" class="header-logo">
-
+<!-- HERO -->
+<header>
   <h1>UrbanReach Digital</h1>
-  <p>Grow Your Business Online with SEO, Websites & Paid Ads</p>
-  <p class="subheading">SEO • Website Designing • Social Media Marketing • Meta Ads</p>
-
-  <div class="header-buttons">
-    <a href="https://wa.me/916239756502" target="_blank" class="cta-btn">
-      Get Free Consultation
-    </a>
-  </div>
+  <p>Grow your brand with expert SEO, Web Design & Meta Ads</p>
+  <a href="#contact" class="btn">Get in Touch</a>
+  <a href="https://wa.me/916239756502" class="btn">WhatsApp Us</a>
 </header>
 
-<!-- ================= SERVICES ================= -->
+<!-- SERVICES -->
 <section>
-<h2>Our Services</h2>
-
-<div class="services">
-
-  <div class="box">
-    <h3>SEO Optimization</h3>
-    <p>Rank higher on Google with long-term organic SEO strategies.</p>
-    <a class="btn" href="https://wa.me/919810360488">Contact for SEO</a>
+  <h2>What We Do</h2>
+  <div class="services">
+    <div class="service-card">
+      <h3>SEO Optimization</h3>
+      <p>Boost search rankings & increase organic traffic.</p>
+    </div>
+    <div class="service-card">
+      <h3>Website Design</h3>
+      <p>Responsive, modern & conversion-focused sites.</p>
+    </div>
+    <div class="service-card">
+      <h3>Meta Ads</h3>
+      <p>Performance-driven campaigns for ROI.</p>
+    </div>
   </div>
-
-  <div class="box">
-    <h3>Website Designing</h3>
-    <p>Fast, modern & mobile-friendly websites that convert.</p>
-    <a class="btn" href="https://wa.me/919810360488">Contact for Website</a>
-  </div>
-
-  <div class="box">
-    <h3>Social Media Marketing</h3>
-    <p>Build trust, reach & engagement on social platforms.</p>
-    <a class="btn" href="https://wa.me/919810360488">Contact for SMM</a>
-  </div>
-
-  <div class="box">
-    <h3>Meta Ads</h3>
-    <p>ROI-focused Facebook & Instagram ad campaigns.</p>
-    <a class="btn" href="https://wa.me/919810360488">Contact for Ads</a>
-  </div>
-
-</div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-<div class="footer-container">
-
-  <div class="footer-brand">
-    <img src="Logo-banner.png" alt="logo">
-    <h3>UrbanReach Digital</h3>
-    <p>Results-driven digital marketing agency.</p>
+<!-- PORTFOLIO -->
+<section>
+  <h2>Our Work</h2>
+  <div class="portfolio">
+    <img src="project1.jpg" alt="Project 1">
+    <img src="project2.jpg" alt="Project 2">
+    <img src="project3.jpg" alt="Project 3">
   </div>
+</section>
 
-  <div>
-    <h3>Company</h3>
-    <a href="#">About</a><br>
-    <a href="#">Portfolio</a><br>
-    <a href="#">Contact</a>
+<!-- ABOUT -->
+<section>
+  <h2>About Us</h2>
+  <p style="text-align:center;max-width:800px;margin:auto;">
+    We are a digital marketing agency helping businesses grow online with clear strategies and measurable results.
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-form">
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea placeholder="Your Message"></textarea>
+    <a class="btn" href="https://wa.me/916239756502">Send via WhatsApp</a>
   </div>
+</section>
 
-  <div>
-    <h3>Services</h3>
-    <a href="#">SEO</a><br>
-    <a href="#">Web Design</a><br>
-    <a href="#">Meta Ads</a>
-  </div>
-
-  <div>
-    <h3>Social</h3>
-    <a href="#">Facebook</a><br>
-    <a href="#">Instagram</a><br>
-    <a href="#">LinkedIn</a>
-  </div>
-
-</div>
-
-<div class="footer-bottom">
-© 2026 UrbanReach Digital. All Rights Reserved.
-</div>
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanReach Digital. All Rights Reserved.</p>
+  <p><a href="#">Privacy Policy</a></p>
 </footer>
 
 </body>

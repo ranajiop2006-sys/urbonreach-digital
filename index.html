@@ -2,219 +2,985 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>UrbanReach Digital – 3D Experience</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Karyan Apartments NH-24 Ghaziabad | 9911847788</title>
+<meta name="description" content="Karyan Apartments NH-24 Ghaziabad offering premium 2 & 3 Bed Rooms homes, modern amenities, excellent connectivity, and investment potential. Call 9911847788.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-body{
-  margin:0;
-  height:600vh;                 /* scroll depth */
-  background:#000;
-  font-family:Arial,sans-serif;
-  overflow-x:hidden;
-}
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* CANVAS */
-canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:1;
-}
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #9A7A2E;
+    --cream: #F8F4EE;
+    --dark: #0D0D0D;
+    --dark2: #1A1A1A;
+    --dark3: #252525;
+    --text-muted: rgba(255,255,255,0.55);
+    --text-mid: rgba(255,255,255,0.8);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+    --display: 'Bebas Neue', sans-serif;
+  }
 
-/* INTRO TEXT */
-.intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  color:#fff;
-  z-index:3;
-  background:#000;
-  transition:opacity .8s ease;
-}
-.intro.hidden{
-  opacity:0;
-  pointer-events:none;
-}
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body { font-family: var(--sans); background: var(--dark); color: #fff; overflow-x: hidden; }
 
-/* SECTIONS */
-.section{
-  position:fixed;
-  top:50%;
-  transform:translateY(-50%);
-  opacity:0;
-  transition:all .8s ease;
-  color:#fff;
-  z-index:2;
-  text-align:center;
-}
-.section.show{
-  opacity:1;
-}
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark2); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-/* SHAPES */
-.shape{
-  margin:0 auto 15px;
-}
-.square{
-  width:90px;
-  height:90px;
-  background:#ff6600;
-}
-.circle{
-  width:90px;
-  height:90px;
-  background:#00c2ff;
-  border-radius:50%;
-}
-.triangle{
-  width:0;
-  height:0;
-  border-left:50px solid transparent;
-  border-right:50px solid transparent;
-  border-bottom:90px solid #9cff00;
-}
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4vw;
+    height: 72px;
+    transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 1px 0 rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .nav-logo span { color: #fff; font-weight: 300; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--gold); color: var(--dark);
+    border: none; padding: 0.55rem 1.4rem;
+    font-family: var(--sans); font-size: 0.75rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.3s, transform 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-hamburger span { width: 24px; height: 1px; background: #fff; transition: 0.3s; }
 
-/* LEFT / RIGHT */
-.left{
-  left:15%;
-  transform:translate(-50%,-50%);
-}
-.right{
-  right:15%;
-  transform:translate(50%,-50%);
-}
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0D0D0D 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift { to { transform: translateY(80px); } }
 
-/* CONTACT */
-.contact{
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-.contact h2{
-  margin-bottom:10px;
-}
-.contact p{
-  font-size:20px;
-  color:#ff6600;
-}
+  .hero-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); animation: orbFloat 8s ease-in-out infinite;
+  }
+  .hero-orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%);
+    right: -100px; top: -100px;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    left: -50px; bottom: -50px;
+    animation-delay: -4s;
+  }
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 4vw; max-width: 900px;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300; line-height: 0.95;
+    margin-bottom: 1.5rem;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 1s 0.4s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-title strong { display: block; font-weight: 600; }
+
+  .hero-tagline {
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    color: var(--text-muted);
+    max-width: 520px; line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-price-badge {
+    display: inline-flex; align-items: center; gap: 1rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-price-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+  .hero-price-value { font-family: var(--serif); font-size: 2rem; font-weight: 600; color: var(--gold); }
+  .hero-price-sub { font-size: 0.7rem; color: var(--text-muted); }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s 1s forwards;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--dark);
+    border: 2px solid var(--gold);
+    padding: 0.9rem 2.2rem;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%); transition: transform 0.4s;
+  }
+  .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+  .btn-primary:hover::before { transform: translateX(0); }
+
+  .btn-outline {
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.9rem 2.2rem;
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 0.8s 1.4s forwards;
+  }
+  .hero-scroll-hint span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.4; transform: scaleY(0.7); }
+  }
+
+  .hero-stats {
+    position: absolute; right: 4vw; bottom: 3rem;
+    display: flex; flex-direction: column; gap: 1.5rem;
+    z-index: 2;
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .stat-item { text-align: right; }
+  .stat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 600; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+
+  .rera-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 1.5rem;
+    font-size: 0.7rem; color: var(--text-muted);
+    border-left: 2px solid var(--gold);
+    padding-left: 12px;
+    opacity: 0; animation: fadeUp 0.8s 1.1s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 7rem 4vw; }
+  .section-eyebrow {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .section-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 400; line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2rem; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── ABOUT ── */
+  #overview {
+    background: var(--dark2);
+    position: relative; overflow: hidden;
+  }
+  #overview::before {
+    content: 'KARYAN';
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    font-family: var(--display); font-size: 20vw; color: rgba(255,255,255,0.02);
+    pointer-events: none; white-space: nowrap;
+  }
+  .overview-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; max-width: 1200px; margin: 0 auto;
+  }
+  .overview-text p {
+    font-size: 0.95rem; line-height: 1.9;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1.2rem;
+  }
+  .overview-cards {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(201,168,76,0.2);
+  }
+  .overview-card {
+    background: var(--dark3);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+  .overview-card:hover { background: #2a2a2a; }
+  .overview-card-icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+    filter: grayscale(1) brightness(1.5);
+  }
+  .overview-card-title { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--gold); }
+  .overview-card-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── HIGHLIGHTS ── */
+  #highlights { background: var(--dark); }
+  .highlights-inner { max-width: 1200px; margin: 0 auto; }
+  .highlights-header { max-width: 600px; margin-bottom: 4rem; }
+  .highlights-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(201,168,76,0.15);
+  }
+  .highlight-item {
+    background: var(--dark2);
+    padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+  .highlight-item::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+  .highlight-item:hover { background: var(--dark3); }
+  .highlight-item:hover::before { transform: scaleX(1); }
+  .highlight-check {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+    font-size: 1rem; color: var(--gold);
+    transition: background 0.3s;
+  }
+  .highlight-item:hover .highlight-check { background: var(--gold); color: var(--dark); }
+  .highlight-text { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.75); }
+  .highlight-text strong { display: block; font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: #fff; margin-bottom: 0.3rem; }
+
+  /* ── PRICE ── */
+  #price { background: var(--dark2); }
+  .price-inner { max-width: 1200px; margin: 0 auto; }
+  .price-header { text-align: center; margin-bottom: 4rem; }
+  .price-header .divider { margin: 0 auto 2rem; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .price-card {
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 3rem 2rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.4s, transform 0.4s;
+    text-align: center; background: var(--dark3);
+  }
+  .price-card.featured { border-color: var(--gold); }
+  .price-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .price-card:hover { border-color: var(--gold); transform: translateY(-6px); }
+  .price-card:hover::before { opacity: 1; }
+  .price-card-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--gold); color: var(--dark);
+    font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+  }
+  .price-type {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .price-name {
+    font-family: var(--serif); font-size: 1.8rem; font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .price-size {
+    font-size: 0.85rem; color: var(--text-muted);
+    margin-bottom: 2rem; padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .price-val {
+    font-family: var(--serif); font-size: 2.5rem; font-weight: 600;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .price-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 2rem; }
+  .price-btn {
+    display: inline-block; width: 100%;
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 0.9rem; font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    transition: all 0.3s; cursor: pointer; background: transparent;
+    font-family: var(--sans);
+  }
+  .price-btn:hover { background: var(--gold); color: var(--dark); }
+
+  /* ── LOCATION ── */
+  #location { background: var(--dark); }
+  .location-inner { max-width: 1200px; margin: 0 auto; }
+  .location-header { margin-bottom: 4rem; }
+  .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .location-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .location-item {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 1rem;
+    transition: background 0.3s;
+  }
+  .location-item:hover { background: rgba(201,168,76,0.05); }
+  .location-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .location-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); }
+  .map-container {
+    border: 1px solid rgba(201,168,76,0.2);
+    overflow: hidden; position: relative;
+    height: 420px;
+  }
+  .map-container iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.4) contrast(1.1); }
+  .map-overlay-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--gold);
+  }
+
+  /* ── ENQUIRY FORM ── */
+  #enquiry {
+    background: var(--dark2);
+    position: relative; overflow: hidden;
+  }
+  #enquiry::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 0% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 100% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+  .enquiry-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.1fr;
+    gap: 5rem; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .enquiry-text .section-title { margin-bottom: 1rem; }
+  .enquiry-text p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+  .enquiry-features { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .enquiry-features li {
+    font-size: 0.85rem; color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .enquiry-features li::before {
+    content: '—'; color: var(--gold); font-size: 0.7rem;
+  }
+  .form-card {
+    background: var(--dark3);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 3rem;
+  }
+  .form-title { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .form-rera { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.05em; margin-bottom: 2rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.5rem;
+  }
+  .form-group input, .form-group select {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff; padding: 0.85rem 1rem;
+    font-size: 0.9rem; font-family: var(--sans);
+    transition: border-color 0.3s;
+    outline: none; appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--dark3); }
+  .form-consent {
+    font-size: 0.72rem; color: var(--text-muted);
+    line-height: 1.6; margin-bottom: 1.5rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .submit-btn {
+    width: 100%; background: var(--gold); border: none;
+    color: var(--dark); padding: 1rem;
+    font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; font-family: var(--sans);
+    transition: background 0.3s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #090909;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 4rem 4vw 2rem;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 4rem; margin-bottom: 3rem;
+  }
+  .footer-brand-name {
+    font-family: var(--serif); font-size: 1.5rem;
+    font-weight: 600; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .footer-brand-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+  .footer-heading {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-links a {
+    font-size: 0.85rem; color: var(--text-muted);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-contact p { font-size: 0.85rem; color: var(--text-muted); line-height: 2; }
+  .footer-contact a { color: var(--gold); text-decoration: none; }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 2rem;
+    font-size: 0.72rem; color: rgba(255,255,255,0.3);
+    line-height: 1.8;
+  }
+
+  /* ── FLOATING ACTIONS ── */
+  .float-actions {
+    position: fixed; bottom: 2rem; right: 2rem;
+    z-index: 999; display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .float-btn {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .float-btn:hover { transform: scale(1.1) translateY(-2px); }
+  .float-wa { background: #25D366; }
+  .float-call { background: var(--gold); font-size: 0.65rem; font-weight: 700; color: var(--dark); letter-spacing: 0.05em; width: auto; height: auto; border-radius: 0; padding: 0.6rem 1rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.85);
+    display: none; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 3rem; max-width: 500px; width: 100%;
+    position: relative; animation: modalIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.85) translateY(30px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; color: var(--text-muted);
+    font-size: 1.5rem; cursor: pointer; line-height: 1;
+    transition: color 0.3s;
+  }
+  .modal-close:hover { color: var(--gold); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .overview-grid, .location-grid, .enquiry-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+    .price-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .location-list { grid-template-columns: 1fr; }
+    .overview-cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 5rem 5vw; }
+    .highlights-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
-
 <body>
 
-<canvas id="scene"></canvas>
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#">Karyan <span>Apartments</span></a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#price">Pricing</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a class="nav-cta" href="#enquiry">Enquire Now</a>
+  <div class="nav-hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <h1>UrbanReach Digital</h1>
-  <p>Enter our 3D marketing world</p>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Welcome to Karyan Apartments · NH-24 Ghaziabad</div>
+    <h1 class="hero-title">
+      Premium<br>
+      <em>Apartment</em><br>
+      <strong>Homes</strong>
+    </h1>
+    <p class="hero-tagline">
+      Affordable luxury launching soon on Prime Location NH-24 Ghaziabad. Spacious 2 & 3 BHK homes with modern amenities, excellent connectivity, and long-term investment value.
+    </p>
+    <div class="hero-price-badge">
+      <div>
+        <div class="hero-price-label">Starting Price</div>
+        <div class="hero-price-value">₹59 Lakh*</div>
+        <div class="hero-price-sub">Onwards</div>
+      </div>
+      <div style="width:1px;height:60px;background:rgba(201,168,76,0.3)"></div>
+      <div>
+        <div class="hero-price-label">Status</div>
+        <div style="font-family:var(--serif);font-size:1.1rem;color:#fff;margin:4px 0">Launching Soon</div>
+        <div class="hero-price-sub">Pre-Launch BSP ₹5,900/Sq.Ft.</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#enquiry" class="btn-primary">Enquire Now</a>
+      <a href="tel:9911847788" class="btn-outline">📞 9911847788</a>
+    </div>
+    <div class="rera-badge">RERA No: UPRERAPRJ199079/05/2026</div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">8.5</div>
+      <div class="stat-label">Acres</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10</div>
+      <div class="stat-label">Towers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2–3</div>
+      <div class="stat-label">BHK Options</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="overview-grid">
+    <div class="overview-text reveal">
+      <div class="section-eyebrow">Project Overview</div>
+      <h2 class="section-title">The Next Landmark<br>Address on <em>NH-24</em></h2>
+      <div class="divider"></div>
+      <p>Karyan Apartments is an exciting new residential destination offering modern homes in one of the fastest-growing real estate markets of NCR. Strategically located in Ghaziabad, this premium development is designed to meet the needs of today's homebuyers who seek luxury, comfort, connectivity, and long-term investment value.</p>
+      <p>The project features thoughtfully planned apartments with spacious layouts, contemporary architecture, and high-quality Mivan construction standards. Whether you are looking for a 2 BHK apartment or a spacious 3 BHK home, Karyan Apartments offers residences that combine functionality with elegant design.</p>
+      <p>Why pay premium prices when you can enjoy the same convenience? Karyan Apartments, NH-24 Ghaziabad, brings affordable living closer to Vaishali, Indirapuram, Vasundhara, and Shalimar Garden — making your dream location more accessible than ever.</p>
+      <a href="#enquiry" class="btn-primary" style="margin-top:1.5rem">Enquire Now</a>
+    </div>
+    <div class="overview-cards reveal" style="transition-delay:0.2s">
+      <div class="overview-card">
+        <div class="overview-card-icon">🏗</div>
+        <div class="overview-card-title">Mivan Construction</div>
+        <div class="overview-card-text">Premium aluminium formwork technology for superior finish and structural strength.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">🌿</div>
+        <div class="overview-card-title">Gated Community</div>
+        <div class="overview-card-text">Landscaped gardens, clubhouse, and 24/7 security across 8.5 acres.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">🚇</div>
+        <div class="overview-card-title">Prime Connectivity</div>
+        <div class="overview-card-text">Direct access to Delhi–Meerut Expressway and NH-24 for seamless commuting.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-card-icon">📈</div>
+        <div class="overview-card-title">Investment Value</div>
+        <div class="overview-card-text">Rapidly expanding real estate sector with strong capital appreciation potential.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section id="highlights">
+  <div class="highlights-inner">
+    <div class="highlights-header reveal">
+      <div class="section-eyebrow">Project Highlights</div>
+      <h2 class="section-title">Designed For<br><em>Modern Living</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-item reveal">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>Grand Luxury Clubhouse</strong>World-class amenities for recreation, fitness and community living.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.1s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>8.5 Acre Land</strong>Expansive open spaces with lush landscaping and breathing room.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.2s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>10 Towers</strong>Multiple residences designed for privacy, views, and ventilation.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.3s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>Mivan Construction</strong>Superior aluminium formwork for precision, strength, and longevity.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.1s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>Pre-Launch BSP ₹5,900/Sq.Ft.*</strong>Exceptional entry pricing for early investors and homebuyers.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.2s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>Launch BSP ₹7,500/Sq.Ft.*</strong>Significant appreciation expected from pre-launch to launch stage.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.3s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>Payment Plan 25×4</strong>Flexible, investor-friendly payment structure for easy ownership.</div>
+      </div>
+      <div class="highlight-item reveal" style="transition-delay:0.4s">
+        <div class="highlight-check">✓</div>
+        <div class="highlight-text"><strong>EOI Amount ₹5 Lacs</strong>Book your dream home with an expression of interest amount.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="price">
+  <div class="price-inner">
+    <div class="price-header reveal">
+      <div class="section-eyebrow" style="justify-content:center">Karyan Apartments</div>
+      <h2 class="section-title">Price <em>List</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="price-grid">
+      <div class="price-card reveal">
+        <div class="price-type">Configuration</div>
+        <div class="price-name">2 Bedroom Apartment</div>
+        <div class="price-size">Size: 1000 – 1100 Sq. Ft.</div>
+        <div class="price-val">On Request</div>
+        <div class="price-note">Starting ₹59 Lakh* Onwards</div>
+        <button class="price-btn" onclick="openModal()">Enquire to Know Price</button>
+      </div>
+      <div class="price-card featured reveal" style="transition-delay:0.15s">
+        <div class="price-card-badge">Popular</div>
+        <div class="price-type">Configuration</div>
+        <div class="price-name">2 Bedroom + Study</div>
+        <div class="price-size">Size: 1200 – 1300 Sq. Ft.</div>
+        <div class="price-val">On Request</div>
+        <div class="price-note">Best value with dedicated study</div>
+        <button class="price-btn" onclick="openModal()">Enquire to Know Price</button>
+      </div>
+      <div class="price-card reveal" style="transition-delay:0.3s">
+        <div class="price-type">Configuration</div>
+        <div class="price-name">3 Bedroom Apartment</div>
+        <div class="price-size">Size: 1400 Sq. Ft.</div>
+        <div class="price-val">On Request</div>
+        <div class="price-note">Spacious family living</div>
+        <button class="price-btn" onclick="openModal()">Enquire to Know Price</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="location-inner">
+    <div class="location-header reveal">
+      <div class="section-eyebrow">Location Advantages</div>
+      <h2 class="section-title">Karyan NH-24<br><em>Location</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="location-grid">
+      <div class="location-list reveal">
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Direct Connectivity to Delhi–Meerut Expressway</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">15 Mins to Noida</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">30 Mins to Akshardham, Delhi</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">10 Mins to Ghaziabad Railway Station</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">15 Mins to Electronic City Noida Metro Station</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Easy Access to Upcoming Jewar Airport</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Close to IGI Airport, Delhi</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Nearby Gurukul & Ryan International School</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Close to IMS Ghaziabad</div></div>
+        <div class="location-item"><div class="location-dot"></div><div class="location-text">Near Yashoda & Manipal Hospital</div></div>
+      </div>
+      <div class="map-container reveal" style="transition-delay:0.2s">
+        <div class="map-overlay-top"></div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4307.430276478444!2d77.48465927613816!3d28.670443682356925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf3936eed12e5%3A0x7f706bb48cf172af!2sKaryan%20Nine!5e1!3m2!1sen!2sin!4v1781346517196!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem" class="reveal">
+      <a href="#enquiry" class="btn-primary" style="margin-right:1rem">Enquire Now</a>
+      <a href="tel:9911847788" class="btn-outline">Call Now: 9911847788</a>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section id="enquiry">
+  <div class="enquiry-inner">
+    <div class="enquiry-text reveal">
+      <div class="section-eyebrow">Get in Touch</div>
+      <h2 class="section-title">Express Your<br><em>Interest</em></h2>
+      <div class="divider"></div>
+      <p>Take the first step toward your dream home. Our team will get back to you with complete project details, floor plans, and the best pricing available.</p>
+      <ul class="enquiry-features">
+        <li>Premium 2 & 3 BHK Apartments on NH-24</li>
+        <li>Starting from ₹59 Lakh*</li>
+        <li>RERA Registered Project</li>
+        <li>Flexible Payment Plans Available</li>
+        <li>Free Site Visit on Request</li>
+      </ul>
+    </div>
+    <div class="form-card reveal" style="transition-delay:0.2s">
+      <div class="form-title">Express Your Interest</div>
+      <div class="form-rera">Project RERA No: UPRERAPRJ199079/05/2026</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Interested In</label>
+        <select>
+          <option>2 BHK Apartment (1000–1100 Sq. Ft.)</option>
+          <option>2 BHK + Study (1200–1300 Sq. Ft.)</option>
+          <option>3 BHK Apartment (1400 Sq. Ft.)</option>
+        </select>
+      </div>
+      <p class="form-consent">I give my consent for the privacy policy to apply to the processing of the provided data. I give authority to the website owner and its representatives permission to contact me via phone, text, email with its offers and products.</p>
+      <button class="submit-btn">Submit Enquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Karyan Apartments</div>
+      <p class="footer-brand-desc">Welcome to Karyan Apartments – Premium Apartments on NH-24, Ghaziabad. Spacious homes, modern amenities & seamless NCR connectivity.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#highlights">Highlights</a></li>
+        <li><a href="#price">Price List</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#enquiry">Enquire Now</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-heading">Contact</div>
+      <p>NH-24 Ghaziabad<br>
+        <a href="tel:+919911847788">+91 9911847788</a><br><br>
+        <a href="https://api.whatsapp.com/send?phone=+919268900800&text=Hi!%20I%27m%20Interested%20In%20Karyan%20Apartments" target="_blank">WhatsApp Us</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Disclaimer: Copyright © Karyan Apartments 2026. UP RERA Registration No. UPRERAPRJ199079/05/2026. The website belongs to Authorized Channel Partner "A SQUARE TECHNOLOGIES" Agent RERA NO UPRERAAGT10997 of "Karyan Group". Content is for information purposes only. Images for representation purpose only. Prices mentioned are subject to change without notice and properties mentioned are subject to availability. © All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- FLOATING -->
+<div class="float-actions">
+  <a href="https://api.whatsapp.com/send?phone=+919268900800&text=Hi!%20I%27m%20Interested%20In%20Karyan%20Apartments%20Please%20Share%20Details." target="_blank" class="float-btn float-wa" title="WhatsApp">💬</a>
+  <a href="tel:9911847788" class="float-btn float-call">CALL</a>
 </div>
 
-<!-- SERVICES -->
-<div class="section left" id="s1">
-  <div class="shape square"></div>
-  <h2>SEO Optimization</h2>
-  <p>Rank higher with smart organic growth</p>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="form-title" style="margin-bottom:0.4rem">Get Price Details</div>
+    <div class="form-rera" style="margin-bottom:1.5rem">RERA: UPRERAPRJ199079/05/2026</div>
+    <div class="form-group"><label>Name</label><input type="text" placeholder="Your Name"></div>
+    <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+    <div class="form-group">
+      <label>Unit Type</label>
+      <select>
+        <option>2 BHK Apartment</option>
+        <option>2 BHK + Study</option>
+        <option>3 BHK Apartment</option>
+      </select>
+    </div>
+    <button class="submit-btn">Get Price Details</button>
+  </div>
 </div>
-
-<div class="section right" id="s2">
-  <div class="shape circle"></div>
-  <h2>Website Designing</h2>
-  <p>High-converting modern websites</p>
-</div>
-
-<div class="section left" id="s3">
-  <div class="shape triangle"></div>
-  <h2>Meta Ads</h2>
-  <p>Performance-driven paid campaigns</p>
-</div>
-
-<!-- PROJECTS -->
-<div class="section right" id="p1">
-  <div class="shape square"></div>
-  <h2>Project Alpha</h2>
-  <p>E-commerce growth strategy</p>
-</div>
-
-<div class="section left" id="p2">
-  <div class="shape circle"></div>
-  <h2>Project Beta</h2>
-  <p>Brand awareness campaign</p>
-</div>
-
-<!-- CONTACT -->
-<div class="section contact" id="contact">
-  <h2>Contact Us</h2>
-  <p>📞 9810360488</p>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
 
 <script>
-/* ===== THREE SETUP ===== */
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,1000);
-camera.position.z = 6;
-
-const renderer = new THREE.WebGLRenderer({canvas:sceneEl=document.getElementById("scene"),antialias:true});
-renderer.setSize(innerWidth,innerHeight);
-
-/* OBJECT */
-const geo = new THREE.SphereGeometry(1.2,64,64);
-const mat = new THREE.MeshStandardMaterial({color:0xff6600,metalness:.6,roughness:.3});
-const sphere = new THREE.Mesh(geo,mat);
-scene.add(sphere);
-
-/* LIGHT */
-const light = new THREE.PointLight(0xffffff,1.2);
-light.position.set(5,5,5);
-scene.add(light);
-
-/* SCROLL CONTROL */
-const intro = document.getElementById("intro");
-const sections = [
-  {el:s1, start:300, end:900},
-  {el:s2, start:1000, end:1600},
-  {el:s3, start:1700, end:2300},
-  {el:p1, start:2400, end:3000},
-  {el:p2, start:3100, end:3700},
-  {el:contact, start:3800, end:5000}
-];
-
-window.addEventListener("scroll",()=>{
-  const y = scrollY;
-  camera.position.z = 6 + y*0.008;
-
-  intro.classList.toggle("hidden",y>100);
-
-  sections.forEach(s=>{
-    if(y>s.start && y<s.end){
-      s.el.classList.add("show");
-    }else{
-      s.el.classList.remove("show");
-    }
+  // Navbar scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
   });
-});
 
-/* ANIMATE */
-function animate(){
-  requestAnimationFrame(animate);
-  sphere.rotation.y += 0.002;
-  sphere.rotation.x += 0.0015;
-  renderer.render(scene,camera);
-}
-animate();
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
 
-/* RESPONSIVE */
-addEventListener("resize",()=>{
-  camera.aspect=innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);
-});
+  // Modal
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Hamburger menu stub
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (links) {
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'fixed';
+      links.style.top = '72px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(13,13,13,0.97)';
+      links.style.padding = '2rem';
+      links.style.gap = '1.5rem';
+    }
+  }
+
+  // Submit buttons – simple feedback
+  document.querySelectorAll('.submit-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.textContent = '✓ Submitted – We will contact you soon!';
+      this.style.background = '#2d7a2d';
+      this.style.color = '#fff';
+      setTimeout(() => { closeModal(); }, 2000);
+    });
+  });
 </script>
-
 </body>
 </html>
